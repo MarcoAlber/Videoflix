@@ -1,0 +1,14 @@
+from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
+from datetime import timedelta
+
+class ActivationToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='activation_token')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_valid(self):
+        return timezone.now() < self.created_at + timedelta(days=1)
+    
+    def __str__(self):
+        return f"ActivationToken for {self.user.username} {self.created_at}"
