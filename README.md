@@ -171,45 +171,45 @@ Video
 
 ## ⚙️ Dependencies
 
-Key Python packages:
+    Key Python packages:
 
-Django 5.2.8
-djangorestframework 3.16.1
-djangorestframework-simplejwt 5.5.1
-psycopg2-binary
-django-rq
-redis
-gunicorn
-whitenoise
+    Django 5.2.8
+    djangorestframework 3.16.1
+    djangorestframework-simplejwt 5.5.1
+    psycopg2-binary
+    django-rq
+    redis
+    gunicorn
+    whitenoise
 
-Environment Variables (.env)
-DJANGO_SUPERUSER_USERNAME=admin
-DJANGO_SUPERUSER_PASSWORD=adminpassword
-DJANGO_SUPERUSER_EMAIL=admin@example.com
+    Environment Variables (.env)
+    DJANGO_SUPERUSER_USERNAME=admin
+    DJANGO_SUPERUSER_PASSWORD=adminpassword
+    DJANGO_SUPERUSER_EMAIL=admin@example.com
 
-SECRET_KEY="your-secret-key"
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-CSRF_TRUSTED_ORIGINS=http://localhost:5500
+    SECRET_KEY="your-secret-key"
+    DEBUG=True
+    ALLOWED_HOSTS=localhost,127.0.0.1
+    CSRF_TRUSTED_ORIGINS=http://localhost:5500
 
-DB_NAME=videoflix_db
-DB_USER=videoflix_user
-DB_PASSWORD=supersecretpassword
-DB_HOST=db
-DB_PORT=5432
+    DB_NAME=videoflix_db
+    DB_USER=videoflix_user
+    DB_PASSWORD=supersecretpassword
+    DB_HOST=db
+    DB_PORT=5432
 
-REDIS_HOST=redis
-REDIS_LOCATION=redis://redis:6379/1
-REDIS_PORT=6379
-REDIS_DB=0
+    REDIS_HOST=redis
+    REDIS_LOCATION=redis://redis:6379/1
+    REDIS_PORT=6379
+    REDIS_DB=0
 
-EMAIL_HOST=smtp.example.com
-EMAIL_PORT=587
-EMAIL_HOST_USER=your_email_user
-EMAIL_HOST_PASSWORD=your_email_password
-EMAIL_USE_TLS=True
-EMAIL_USE_SSL=False
-DEFAULT_FROM_EMAIL=default_from_email
+    EMAIL_HOST=smtp.example.com
+    EMAIL_PORT=587
+    EMAIL_HOST_USER=your_email_user
+    EMAIL_HOST_PASSWORD=your_email_password
+    EMAIL_USE_TLS=True
+    EMAIL_USE_SSL=False
+    DEFAULT_FROM_EMAIL=default_from_email
 
 ---
 
