@@ -1,25 +1,28 @@
+# video_app/api/signals.py
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from ..models import Video
 import django_rq
-from video_app.api.tasks import generate_thumbnail, generate_hls
+from video_app.api.tasks import generate_thumbnail, generate_hls 
 
 @receiver(post_save, sender=Video)
 def generate_thumbnail_and_hls_signal(sender, instance, created, **kwargs):
-    """
-    Signal handler that triggers background tasks after a Video instance is created.
-
-    When a new Video with a file is saved, this signal enqueues:
-        - `generate_thumbnail`: Creates a thumbnail for the video.
-        - `generate_hls`: Generates HLS streaming files.
-
-    Args:
-        sender (Model): The model class (Video).
-        instance (Video): The saved Video instance.
-        created (bool): True if a new record was created.
-        **kwargs: Additional keyword arguments.
+    """ 
+    Signal-Handler, der Hintergrund-Tasks nach dem Speichern einer Video-Instanz auslöst.
+    
+    - Bei Erstellung wird HLS-Generierung gestartet.
+    - Die Thumbnail-Generierung wird NUR gestartet, wenn KEIN Thumbnail 
+      vom Benutzer hochgeladen wurde.
     """
     if created and instance.video_file:
         queue = django_rq.get_queue("default")
-        queue.enqueue(generate_thumbnail, instance.id)
+        
+        # 1. Bedingte Thumbnail-Generierung
+        # Prüfe, ob das 'thumbnail'-Feld der Instanz leer ist.
+        # Wenn KEIN Thumbnail hochgeladen wurde, generiere eins.
+        if not instance.thumbnail:
+            queue.enqueue(generate_thumbnail, instance.id)
+        
+        # 2. HLS-Generierung (wie bisher)
         queue.enqueue(generate_hls, instance.id)
